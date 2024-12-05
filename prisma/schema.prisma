@@ -1,0 +1,33 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id    Int @default(autoincrement())
+  email String @unique
+  password String 
+  credits Int
+  role Role @default(CLIENT)
+  token String
+  responses String[]
+}
+
+model AiModel {
+  id String @id 
+  chatId String @default("")
+  costPerToken Float
+}
+
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
